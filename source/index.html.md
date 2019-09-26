@@ -791,13 +791,90 @@ efficient way to do this?
 * explanation: This is the fourth row of Pascal's triangle.
 
 ## Luggage Packing
+
+```javascript
+function getWeights() {
+    let result = [];
+    for(let i = 0; i < Math.floor((Math.random() * 100) + 1); i++) {
+        result.push(Math.floor((Math.random() * 2000) + 1));
+    }
+    return result;
+}
+
+testSort = function() {
+    for(let i = 0; i < 100; i++) {
+        let a = getWeights();
+        let sortAttempt = sortWeights(a);
+        let sortSolution = a.slice(0).sort(function(a, b){return a-b});
+        for(let j = 0; j < a.length; j++) {
+            if(sortAttempt[j] != sortSolution[j]) {
+                console.log("Submission failed for a=" + a);
+                return 1;
+            }
+        }
+    }
+    console.log("Submission accepted!");
+    return 0;
+}
+```
+
+```python
+from random import randint
+
+def getWeights():
+    return [randint(1, 2000) for i in range(randint(1, 100))]
+
+def testSort():
+    for i in range(100):
+        a = getWeights()
+        if sortWeights(a) != a.copy().sort():
+            print("Submission failed for a=", str(a))
+            return 1
+    print("Submission accepted!")
+    return 0
+```
+
+```java
+import java.util.Arrays;
+
+public class Luggage {
+
+    public static int[] getWeights() {
+        int elems = (int) (Math.random() * 100) + 1;
+        int[] result = new int[elems];
+        for(int i = 0; i < elems; i++) {
+            result[i] = (int)(Math.random() * 2000) + 1;
+        }
+        return result;
+    }
+
+    public static int[] sortWeights(int[] weights) {
+        // TODO Implement me!
+    }
+
+    public static void main(String[] args) {
+        for(int i = 0; i < 100; i++) {
+            int[] a = getWeights();
+            int[] sortAttempt = sortWeights(a);
+            int[] sortSolution = Arrays.sort(a);
+            if(!Arrays.equals(sortAttempt, sortSolution)) {
+                System.out.println("Submission failed for a="
+                    + Arrays.toString(a));
+            }
+        }
+        System.out.println("Submission accepted!");
+        return;
+    }
+}
+```
+
 **24 points**
 
 Pogo is packing for his vacation in Wyoming.  He wants to put the heaviest items
 at the bottom of his suitcase so it does not fall over easily.  Being very
 meticulous, Pogo has weighed all of the items in his suitcase and recorded all
 of the data.  Given a list of weight measurements, sort the weight measurements
-in non-decreasing order.
+in non-decreasing order.  No `stdlib` functions allowed.
 
 **Specifications:**
 
@@ -845,6 +922,77 @@ generalize the Riemann sum function to take any function as a parameter
 * (extra challenge) function signature: `riemann(f: Function, from: Float, to: Float, subintervals: Int) -> Float`
 
 ## Mirror, Mirror, on the Wall
+
+```javascript
+function getRandomImage(rows, cols, min, max) {
+    return [...Array(rows)].map(e =>
+        Array(cols).fill(Math.floor(Math.random() * ((max - min) + 1)) + min));
+}
+
+function imageToString(image) {
+    let result = "";
+    for(let i = 0; i < image.length; i++) {
+        result += "| ";
+        for(let j = 0; j < image[0].length; j++) {
+            result += image[i][j] + " ";
+        }
+        result += "|\n";
+    }
+    return result;
+}
+```
+
+```python
+from random import randint
+
+def getRandomImage(rows, cols, min, max):
+    return [[randint(min, max) for i in range(rows)] for j in range(cols)]
+
+def imageToString(image):
+    result = ""
+    for i in image:
+        result += "| "
+        for j in i:
+            result += j + " "
+        result += "|\n"
+    return result
+```
+
+```java
+public class Mirror {
+
+    public static int[][] getRandomImage(int rows, int cols, int min, int max) {
+        int[][] result = new int[rows][cols];
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                result[i][j] = (int)(Math.random() * ((max - min) + 1)) + min;
+            }
+        }
+        return result;
+    }
+
+    public static String imageToString(int[][] image) {
+        String result = "";
+        for(int i = 0; i < image.length; i++) {
+            result += "| ";
+            for(int j = 0; j < image[0].length; j++) {
+                result += image[i][j] + " ";
+            }
+            result += "|\n";
+        }
+        return result;
+    }
+
+    public static int[][] transpose(int[][] input) {
+        // TODO Implement me!
+    }
+
+    public static void main(String[] args) {
+        // Tests here
+    }
+}
+```
+
 **24 points**
 
 Gerald has a Strange Mirror which, instead of flipping images horizontally and
@@ -882,6 +1030,29 @@ Gerald's Strange Mirror.
 * function signature: `transpose(input: [[Int]]) -> [[Int]]`
 
 ## Roman Numerals
+
+```javascript
+function getDecimalValue() {
+    return Math.floor(Math.random() * 2000 + 1);
+}
+```
+
+```python
+import random
+
+def getDecimalValue():
+    return random.randint(1, 2000)
+```
+
+```java
+class RomanNumerals {
+
+    private static int getDecimalValue() {
+        return (int) (Math.random() * 2000 + 1);
+    }
+}
+```
+
 **36 points**
 
 A bombshell study released by a group of world-renown archaeologists has
@@ -938,6 +1109,46 @@ may not use built-in substring or regex functions.
   string.  A trustworthy student.
 
 ## Prophetic Warren Buffett
+
+```javascript
+function getStockPrices() {
+    let result = [];
+    for(let i = 0; i < Math.floor((Math.random() * 500) + 1); i++) {
+        result.push(Math.floor((Math.random() * 1000) + 1000) / 100);
+    }
+    return result;
+}
+```
+
+```python
+from random import randint
+
+def getStockPrices():
+    return [randint(1000, 2000)/100 for i in range(randint(1, 500))]
+```
+
+```java
+public class StockProfit {
+
+    public static double[] getStockPrices() {
+        int elems = (int) (Math.random() * 500) + 1;
+        double[] result = new double[elems];
+        for(int i = 0; i < elems; i++) {
+            result[i] = Math.floor((Math.random() * 1000) + 1000) / 100;
+        }
+        return result;
+    }
+
+    public static double findProfit(double[] prices) {
+        // TODO Implement me!
+    }
+
+    public static void main(String[] args) {
+        // tests here
+    }
+}
+```
+
 **54 points**
 
 Warren Buffett, making a deal with a treacherous genie, wished to have the
@@ -982,6 +1193,44 @@ determines the area of the land.
 * function signature: `findArea(coordinates: [(Int,Int)]) -> Float`
 
 ## Iconic Skylines
+
+```javascript
+function getCityMap(rows, cols, min, max) {
+    return [...Array(rows)].map(e =>
+        Array(cols).fill(Math.floor(Math.random() * ((max - min) + 1)) + min));
+}
+```
+
+```python
+from random import randint
+
+def getCityMap(rows, cols, min, max):
+    return [[randint(min, max) for i in range(rows)] for j in range(cols)]
+```
+
+```java
+public class Skylines {
+
+    public static int[][] getCityMap(int rows, int cols, int min, int max) {
+        int[][] result = new int[rows][cols];
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                result[i][j] = (int)(Math.random() * ((max - min) + 1)) + min;
+            }
+        }
+        return result;
+    }
+
+    public static int getMaxStories(int[][] cityMap) {
+        // TODO Implement me!
+    }
+
+    public static void main(String[] args) {
+        // Tests here
+    }
+}
+```
+
 **64 points**
 
 Huge, famous cities around the world are recognizable just by their skylines:
@@ -1000,6 +1249,46 @@ stories that Aaaaak can build to solve its population problem.
 * function signature: `getMaxStories(cityMap: [[Int]]) -> Int`
 
 ## Big Number Builder
+
+```javascript
+function randomInts() {
+    let result = [];
+    for(let i = 0; i < Math.floor((Math.random() * 5) + 1); i++) {
+        result.push(Math.floor((Math.random() * 100) + 1));
+    }
+    return result;
+}
+```
+
+```python
+from random import randint
+
+def randomInts():
+    return [randint(1, 100) for i in range(randint(1, 5))]
+```
+
+```java
+public class NumberBuilder {
+
+    public static int[] randomInts() {
+        int elems = (int) (Math.random() * 5) + 1;
+        int[] result = new int[elems];
+        for(int i = 0; i < elems; i++) {
+            result[i] = (int)(Math.random() * 100) + 1;
+        }
+        return result;
+    }
+
+    public static int[] buildBigNumber(int[] from) {
+        // TODO Implement me!
+    }
+
+    public static void main(String[] args) {
+        // tests here
+    }
+}
+```
+
 **84 points**
 
 Given a list of integers, find the largest number possible created by the
@@ -1024,6 +1313,32 @@ much more efficient than $O(n!)$ time.
 * explanation: Using all numbers, the largest number possible is 8,641,161.
 
 ## Bored Monkeys
+
+```javascript
+// How many monkeys are there?
+function countMonkeys() {
+    return Math.floor(Math.random() * 12 + 1);
+}
+```
+
+```python
+import random
+
+# How many monkeys are there?
+def countMonkeys():
+    return random.randint(1, 12)
+```
+
+```java
+class Monkey {
+
+    // How many monkeys are there?
+    private static int countMonkeys() {
+        return (int) (Math.random() * 12 + 1);
+    }
+}
+```
+
 **96 points**
 
 You have $N$ monkeys at $N$ different stations doing different activities
@@ -1121,6 +1436,44 @@ path as an array.  If not, return null.
   `null`.
 
 ## Puddles
+
+```javascript
+function getTopology(rows, cols, min, max) {
+    return [...Array(rows)].map(e =>
+        Array(cols).fill(Math.floor(Math.random() * ((max - min) + 1)) + min));
+}
+```
+
+```python
+from random import randint
+
+def getTopology(rows, cols, min, max):
+    return [[randint(min, max) for i in range(rows)] for j in range(cols)]
+```
+
+```java
+public class Puddles {
+
+    public static int[][] getTopology(int rows, int cols, int min, int max) {
+        int[][] result = new int[rows][cols];
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                result[i][j] = (int)(Math.random() * ((max - min) + 1)) + min;
+            }
+        }
+        return result;
+    }
+
+    public static int puddles(int[][] map) {
+        // TODO Implement me!
+    }
+
+    public static void main(String[] args) {
+        // Tests here
+    }
+}
+```
+
 **180 points**
 
 Puddles form in ruts and holes in the ground.  But how much water can a surface
